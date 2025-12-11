@@ -4,15 +4,23 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     first_name = models.CharField(max_length=20, verbose_name='نام')
     last_name = models.CharField(max_length=20, verbose_name='نام خانوادگی')
-    national_code = models.CharField(max_length=10, verbose_name='کد ملی')
-    student_code = models.CharField(max_length=9, verbose_name='شماره دانشجویی')
+    national_code = models.CharField(max_length=10, verbose_name='کد ملی',unique=True)
+    student_code = models.CharField(max_length=9, verbose_name='شماره دانشجویی',unique=True)
     placed_in = models.ForeignKey('Room', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='محل دانشجو', related_name='students')
     payed_cost = models.BooleanField(verbose_name='وضعیت پرداخت هزینه اتاق', default=False)
+
+    def __str__(self):
+
+        text = f"{self.first_name} {self.last_name}"
+        if self.is_superuser:
+            text += " [ ادمین ]"
+        else:
+            text += " [ دانشجو ]"
+        return text
 
     class Meta:
         verbose_name = "کاربر"
         verbose_name_plural = "کاربران"
-
 
 class OtherInfo(models.Model):
     start_selectroom_event = models.DateTimeField(verbose_name='آغاز زمان انتخاب اتاق')
@@ -64,7 +72,7 @@ class Dorm(models.Model):
 
 class Block(models.Model):
     name = models.CharField(max_length=64, verbose_name='نام بلوک')
-    placed_in = models.ForeignKey(Dorm, on_delete=models.PROTECT, verbose_name='واقع در')
+    placed_in = models.ForeignKey(Dorm, on_delete=models.PROTECT, verbose_name='در خوابگاه')
     floor_count = models.PositiveIntegerField(verbose_name='تعداد طبقه')
     floor_rooms = models.PositiveIntegerField(verbose_name='تعداد اتاق در هر طبقه')
     default_room_capacity = models.PositiveIntegerField(verbose_name='ظرفیت پیش‌ فرض هر اتاق', default=6)
@@ -73,7 +81,7 @@ class Block(models.Model):
     is_active = models.BooleanField(verbose_name='وضعیت فعال بودن', default=True)
 
     def __str__(self):
-        return f"{self.name} - {self.placed_in.name}"
+        return f"{self.name} در خوابگاه {self.placed_in.__str__()}"
 
     @property
     def total_capacity(self):
@@ -126,7 +134,7 @@ class Room(models.Model):
     is_active = models.BooleanField(verbose_name='وضعیت فعال بودن', default=True)
 
     def __str__(self):
-        return f"اتاق {self.number} ({self.placed_in.name})"
+        return f"{self.number} بلوک {self.placed_in.name} خوابگاه {self.placed_in.placed_in.name}"
 
     @property
     def current_occupancy(self):

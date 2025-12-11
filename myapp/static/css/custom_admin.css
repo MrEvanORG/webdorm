@@ -1,0 +1,62 @@
+body, 
+.dashboard .module caption, 
+.field-box, 
+.form-row, 
+h1, h2, h3, h4, h5, h6, 
+input, select, textarea, button {
+    font-family: 'vazir', Tahoma, sans-serif !important;
+}
+
+html[data-theme="dark"] {
+    --primary:var(--primary-color) !important;
+    --secondary:var(--secondary-color) !important;
+    --link-fg : var(--text-color) !important;
+    --accent: var(--text-color);
+    --selected-row : var(--accent-color) !important;
+    --darkened-bg : #0f0f0f !important;
+
+    --button-hover-bg:var(--primary-color) !important;
+    --default-button-bg:var(--accent-color) !important;
+    --default-button-hover-bg :var(--darkaccent-color) !important;
+    
+    --body-bg : var(--black-color) !important ;  
+
+    /*--breadcrumbs-bg:var(--primary) !important;
+    --link-fg:var(--link-color) !important;
+    --link-hover-color:var(--link-color-hover) !important; */
+    /* --header-branding-color: var(--accent);
+    --border-color: var(--border-color) !important;
+    
+    
+    --button-hover-bg:var(--primary) !important;
+    --default-button-hover-bg: var(--primary) !important;
+    --link-selected-fg: var(--primary) !important;
+    --link-fg: var(--primary-color) !important;
+    --breadcrumbs-bg : var(--primary) !important;
+    
+    --default-button-bg:var(--secondary)!important;
+    --header-bg: var(--secondary) !important;
+    --button-bg: var(--secondary) !important;
+    --link-hover-color:var(--secondary-color) !important;
+    
+    
+    --primary-fg:var(--white-color) !important;
+    --header-link-color: var(--primary-fg) !important;
+    --body-bg:var(--section-bg-color) !important;
+    --breadcrumbs-link-fg: var(--body-bg) !important;
+
+    --body-loud-color:var(--dark-color) !important; */
+}
+
+html[data-theme="light"] {
+    --text-color:var(--accent);
+    --white-color:var(--link-fg) !important;
+}
+
+.current-model a{
+    color: var(--white-color) !important;
+}
+caption a{
+    color:var(--text-color) !important;
+    font-size: 14px;
+}

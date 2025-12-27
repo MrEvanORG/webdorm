@@ -1,0 +1,148 @@
+/* ۱. وارد کردن پالت رنگی از فایل روت */
+@import url('root/light_root.css');
+
+/* ۲. تنظیمات پایه برای کل پروژه */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    direction: rtl;
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: var(--primary-color); /* پس‌زمینه بسیار تیره طبق روت */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+
+}
+
+button, input{
+    font-family: "Vazirmatn";
+
+}
+
+.container {
+    width: 100%;
+    max-width: 450px; /* عرض بهینه برای فرم‌ها */
+    text-align: center;
+}
+
+.main-title {
+    color: var(--text-color); /* رنگ سبزآبی روشن از روت */
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* ۳. استایل کارت (مشترک برای ورود و ثبت نام) */
+.login-card {
+    background-color: var(--secondary-color); /* رنگ بنفش تیره از روت */
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-title {
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 1.4rem;
+    border-bottom: 2px solid var(--third-color);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* ۴. فرم و فیلدهای ورودی */
+.input-group {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.input-group label {
+    display: block;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--third-color);
+    border-radius: 8px;
+    background-color: var(--white-color); /* سفید */
+    color: var(--black-color); /* متن داخل باکس کاملاً مشکی طبق درخواست شما */
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    box-shadow: 0 0 10px var(--third-color);
+    border-color: var(--text-color);
+}
+
+/* ۵. دکمه‌ها */
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--third-color); /* آبی روشن پالت */
+    color: var(--white-color);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: var(--accent-color); /* تغییر رنگ به سبز آکاسیا در هاور */
+    transform: translateY(-2px);
+}
+
+/* ۶. متون اضافه و لینک‌ها */
+.extra-text {
+    color: var(--text-color);
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.extra-text a {
+    color: var(--third-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.extra-text a:hover {
+    text-decoration: underline;
+    color: var(--text-color);
+}
+
+/* ۷. اصلاح فوتر (حل مشکل تصویر) */
+.main-footer {
+    margin-top: 40px;
+    padding: 15px;
+    border-top: 1px solid rgba(91, 143, 185, 0.2); /* استفاده از شفافیت Third Color */
+}
+
+.main-footer p {
+    color: var(--text-color);
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* ۸. واکنش‌گرایی برای موبایل */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 25px 15px;
+    }
+    .main-title {
+        font-size: 1.5rem;
+    }
+}

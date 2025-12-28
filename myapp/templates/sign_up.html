@@ -3,39 +3,60 @@
 {% block title %}ثبت‌نام{% endblock %}
 
 {% block content %}
+<h1 class="main-title">سامانه مدیریت خوابگاه</h1>
 <div class="login-card"> 
     <h2 class="card-title">فرم ثبت نام دانشجویان نوورود</h2>
 
-    <form action="#" method="POST" class="register-form">
-        <div class="input-group">
-            <label for="student-id">کد دانشجویی</label>
-            <input type="text" id="student-id" name="student_id" placeholder="مثال: 403123456" required>
-        </div>
+    <form action="" method="POST" class="register-form">
+        {% csrf_token %}
         
         <div class="input-group">
-            <label for="student-id">کد ملی</label>
-            <input type="text" id="National-id" name="National_id" placeholder="مثال: 09123456789" required>
+            <label for="student-id">کد دانشجویی</label>
+            <input type="text" id="student-id" name="student_id" value="{{ form_data.student_id|default:'' }}" placeholder="مثال: 403123456" required>
         </div>
+        {% if errors.student_id %}
+            <span class="span-error">{{ errors.student_id.0 }}</span>
+        {% endif %}
+        
+        <div class="input-group">
+            <label for="National-id">کد ملی</label>
+            <input type="text" id="National-id" name="national_id" value="{{ form_data.national_id|default:'' }}" placeholder="مثال: 0912345678" required>
+        </div>
+        {% if errors.national_id %}
+            <span class="span-error">{{ errors.national_id.0 }}</span>
+        {% endif %}
 
         <div class="input-group">
-            <label for="full-name">نام  </label>
-            <input type="text" id="first-name" name="first_name" placeholder="نام  خود را وارد کنید" required>
+            <label for="first-name">نام</label>
+            <input type="text" id="first-name" name="first_name" value="{{ form_data.first_name|default:'' }}" placeholder="نام خود را وارد کنید" required>
         </div>
+        {% if errors.first_name %}
+            <span class="span-error">{{ errors.first_name.0 }}</span>
+        {% endif %}
 
         <div class="input-group">
-            <label for="full-name"> نام خانوادگی</label>
-            <input type="text" id="last-name" name="last_name" placeholder="نام خانوادگی خود را وارد کنید" required>
+            <label for="last-name">نام خانوادگی</label>
+            <input type="text" id="last-name" name="last_name" value="{{ form_data.last_name|default:'' }}" placeholder="نام خانوادگی خود را وارد کنید" required>
         </div>
+        {% if errors.last_name %}
+            <span class="span-error">{{ errors.last_name.0 }}</span>
+        {% endif %}
         
         <div class="input-group">
             <label for="password">رمز ورود</label>
             <input type="password" id="password" name="password" placeholder="حداقل ۶ کاراکتر" required>
         </div>
+        {% if errors.password %}
+            <span class="span-error">{{ errors.password.0 }}</span>
+        {% endif %}
 
         <div class="input-group">
-            <label for="password">تکرار رمز ورود</label>
-            <input type="password" id="password" name="password" placeholder="حداقل ۶ کاراکتر" required>
+            <label for="confirm_password">تکرار رمز ورود</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="تکرار رمز ورود را وارد کنید" required>
         </div>
+        {% if errors.non_field_errors %}
+            <span class="span-error">{{ errors.non_field_errors.0 }}</span>
+        {% endif %}
 
         <button type="submit" class="login-button">ثبت نام</button>
     </form>

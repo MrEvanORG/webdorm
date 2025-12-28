@@ -3,23 +3,31 @@
 {% block title %}ورود{% endblock %}
 
 {% block content %}
+<h1 class="main-title">سامانه مدیریت خوابگاه</h1>
+
 <div class="login-card">
     <h2 class="card-title">صفحه ورود</h2>
-
-    <form action="#" method="POST" class="login-form">
-        <div class="input-group">
+    <form action="" method="POST" class="login-form">
+        {% csrf_token %} <div class="input-group">
             <label for="student-id">کد دانشجویی</label>
-            <input type="text" id="student-id" name="student_id" placeholder="مثال: 403123456" required>
+            <input type="text" 
+                   id="student-id" 
+                   name="student_id" 
+                   value="{{ student_id_value|default:'' }}" 
+                   placeholder="مثال: 403123456" 
+                   required>
         </div>
-        
         <div class="input-group">
             <label for="password">رمز عبور</label>
-            <input type="password" id="password" name="password" placeholder="کلمه عبور خود را وارد کنید" required>
+            <input type="password" 
+            id="password" 
+            name="password" 
+            placeholder="کلمه عبور خود را وارد کنید" 
+            required>
         </div>
-
+        {% if error_message %}<span class="span-error">{{ error_message }}</span>{% endif %}
         <button type="submit" class="login-button">ورود</button>
     </form>
-
     <p class="extra-text">
         جهت ثبت نام دانشجویان نوورود 
         <a href="{% url 'signup' %}">اینجا</a> کلیک کنید

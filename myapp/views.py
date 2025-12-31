@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignUpForm
 from .models import User
 
-def index(request):
+def index_page(request):
     if request.user.is_authenticated:
         return redirect(dashboard_page)
 
@@ -82,7 +82,13 @@ def signup_page(request):
         "errors": errors
     })
 
+def select_room_page(request):
+    return render(request, "select_room.html")
 
 @login_required(login_url='index') 
+
+def my_room_page(request):
+    return render(request, "my_room.html")
+
 def dashboard_page(request):
     return render(request, "dashboard.html")

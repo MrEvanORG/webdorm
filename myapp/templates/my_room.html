@@ -1,0 +1,88 @@
+{% extends 'patterns/base.html' %}
+{% load static %}
+
+{% block title %}اتاق من{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-box">
+                <span class="brand-name">webdorm</span>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="{% url 'dashboard_' %}" >داشبورد</a></li>
+            <li><a href="{% url 'my_room_' %}" >اتاق من</a></li>
+            <li><a href="{% url 'select_room_' %}">انتخاب اتاق</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <img src="{% static 'images/user.png' %}" alt="User" class="avatar">
+                <span class="user-name">{{ request.user.get_full_name|default:"کاربر مهمان" }}</span>
+            </div>
+            <button onclick="toggleLogoutModal()" class="logout-btn">خروج از حساب</button>
+        </div>
+    </aside>
+    <main class="dashboard-main" id="main-content">
+        <header class="dashboard-top-nav">
+            <button id="sidebar-toggle" class="toggle-btn" onclick="toggleSidebar()">
+                <span></span><span></span><span></span>
+            </button>
+            <h2 class="page-title">جزئیات اتاق من</h2>
+        </header>
+
+        <div class="room-details-container">
+            <div class="info-grid">
+                <div class="detail-card">
+                    <span class="label">نام خوابگاه</span>
+                    <span class="value">{{ room.dormitory_name }}</span>
+                </div>
+                <div class="detail-card">
+                    <span class="label">بلوک / واحد</span>
+                    <span class="value">{{ room.block_name }}</span>
+                </div>
+                <div class="detail-card">
+                    <span class="label">شماره اتاق</span>
+                    <span class="value">{{ room.room_number }}</span>
+                </div>
+                <div class="detail-card accent">
+                    <span class="label">هزینه ترمی</span>
+                    <span class="value">{{ room.cost }} تومان</span>
+                </div>
+            </div>
+
+            <div class="roommates-section">
+                <div class="section-header">
+                    <h3>هم‌اتاقی‌ها</h3>
+                    <span class="capacity-tag">ظرفیت: {{ room.occupied }}/{{ room.capacity }}</span>
+                </div>
+                
+                <div class="roommates-list">
+                    {% for roommate in roommates %}
+                    <div class="roommate-item">
+                        <div class="roommate-info">
+                            <div class="small-avatar"></div>
+                            <span>{{ roommate.first_name }} {{ roommate.last_name }}</span>
+                        </div>
+                        <span class="student-id">{{ roommate.student_id }}</span>
+                    </div>
+                    {% empty %}
+                    <p class="empty-msg">در حال حاضر هم‌اتاقی ندارید.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+<script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('closed');
+        document.getElementById('main-content').classList.toggle('wide');
+    }
+</script>
+{% endblock %}

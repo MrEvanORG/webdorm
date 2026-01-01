@@ -16,15 +16,16 @@ body {
     overflow-x: hidden;
 }
 
-button, input, a {
+button, input, a, select {
     font-family: "vazir", sans-serif;
     text-decoration: none;
+    outline: none;
 }
 
 /* --- استایل‌های صفحات ورود و ثبت‌نام (Index & Sign up) --- */
 h1.main-title {
     text-align: center;
-    margin-top: 60px;
+    margin-top: 40px;
     color: var(--third-color);
 }
 
@@ -36,21 +37,21 @@ h1.main-title {
     border: 1px solid rgba(255, 255, 255, 0.05);
     width: 100%;
     max-width: 450px;
-    margin: 50px auto;
+    margin: 30px auto;
     text-align: center;
 }
 
 .card-title {
     color: var(--text-color);
-    margin-bottom: 30px;
-    font-size: 1.4rem;
+    margin-bottom: 25px;
+    font-size: 1.3rem;
     border-bottom: 2px solid var(--third-color);
     display: inline-block;
     padding-bottom: 5px;
 }
 
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     text-align: right;
 }
 
@@ -58,7 +59,7 @@ h1.main-title {
     display: block;
     color: var(--text-color);
     margin-bottom: 8px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .input-group input {
@@ -68,18 +69,15 @@ h1.main-title {
     border-radius: 8px;
     background-color: var(--white-color);
     color: var(--black-color);
-    outline: none;
 }
 
 .span-error {
     display: block;              
     color: #ff5f5f;           
     font-size: 0.8rem;        
-    margin-top: -12px;        
-    margin-bottom: 15px;         
-    font-weight: 500;
+    margin-top: -10px;        
+    margin-bottom: 10px;         
     text-align: right;         
-    min-height: 1.2rem;          
 }
 
 .login-button {
@@ -97,7 +95,7 @@ h1.main-title {
 .extra-text {
     margin-top: 15px;
     color: var(--white-color);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .extra-text a {
@@ -126,7 +124,6 @@ h1.main-title {
     border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* حالت بسته برای دسکتاپ */
 .sidebar.closed {
     transform: translateX(260px);
 }
@@ -164,7 +161,7 @@ h1.main-title {
     color: white;
 }
 
-/* --- بخش پروفایل و خروج (Sidebar Footer) --- */
+/* --- پروفایل و آیکون در سایدبار --- */
 .sidebar-footer {
     padding: 15px 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -173,20 +170,19 @@ h1.main-title {
 .user-profile {
     display: flex;
     align-items: center;
-    gap: 12px; /* افزایش فاصله بین عکس و نام */
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
-.avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--third-color);
-    object-fit: cover;
+.profile-icon-box {
+    font-size: 28px;
+    color: var(--third-color);
+    display: flex;
+    align-items: center;
 }
 
 .user-name {
-    font-size: 0.95rem; /* بزرگتر کردن فونت نام کاربر */
+    font-size: 0.9rem;
     color: var(--text-color);
     white-space: nowrap;
     font-weight: 500;
@@ -194,21 +190,15 @@ h1.main-title {
 
 .logout-btn {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     background: transparent;
     border: 1px solid #ff5f5f;
     color: #ff5f5f;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: bold;
     transition: 0.3s;
-    font-family: "vazir";
-}
-
-.page-title {
-    font-size: 1.3rem;
-    margin-right: 10px; /* ایجاد فاصله بین دکمه و متن داشبورد */
 }
 
 .logout-btn:hover {
@@ -219,12 +209,11 @@ h1.main-title {
 /* --- محتوای اصلی داشبورد --- */
 .dashboard-main {
     flex: 1;
-    margin-right: 260px; /* فضای سایدبار در حالت باز دسکتاپ */
+    margin-right: 260px;
     padding: 30px;
     transition: margin-right 0.4s ease;
 }
 
-/* وقتی سایدبار بسته است، محتوا تمام عرض می‌شود */
 .dashboard-main.wide {
     margin-right: 0;
 }
@@ -233,10 +222,9 @@ h1.main-title {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
-/* دکمه همبرگری (همیشه در بالا سمت راست محتوا) */
 .toggle-btn {
     background: var(--secondary-color);
     border: 1px solid var(--third-color);
@@ -246,7 +234,6 @@ h1.main-title {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    z-index: 1100;
 }
 
 .toggle-btn span {
@@ -256,148 +243,58 @@ h1.main-title {
     display: block;
 }
 
-/* --- بخش اطلاعیه‌ها (مینیمال و ۴۰۰ پیکسل) --- */
+/* --- بخش اطلاعیه‌ها (Centered & Date at Bottom-Left) --- */
 .announcements-container {
-    max-width: 800px; /* عرض را از 400 به 650 تغییر دهید */
+    max-width: 800px;
     margin: 0 auto;
-    text-align: center;
 }
 
 .section-subtitle {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     color: var(--text-color);
     opacity: 0.7;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    text-align: center;
 }
 
 .announcement-card {
     background: var(--secondary-color);
-    padding: 15px;
+    padding: 20px;
+    padding-bottom: 35px; /* فضا برای تاریخ */
     border-radius: 12px;
-    margin-bottom: 12px;
-    border-right: 3px solid var(--third-color);
+    margin-bottom: 15px;
+    border-right: 4px solid var(--third-color);
     text-align: right;
+    position: relative;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .announcement-card h4 {
-    font-size: 1.1rem; /* بزرگتر کردن تیتر اطلاعیه */
+    font-size: 1.1rem;
     color: var(--third-color);
     margin-bottom: 8px;
 }
 
 .announcement-card p {
-    font-size: 0.95rem; /* بزرگتر کردن متن توضیحات */
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.announcement-date {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    font-size: 0.75rem;
+    opacity: 0.4;
     color: var(--text-color);
-    line-height: 1.7; /* افزایش فاصله بین خطوط برای خوانایی بیشتر */
 }
 
-/* --- پاپ‌آپ خروج (Modal) --- */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s;
-    z-index: 2000;
-}
-
-.modal-overlay.show {
-    visibility: visible;
-    opacity: 1;
-}
-
-.modal-card {
-    background: var(--secondary-color);
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-    width: 280px;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-
-.modal-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    justify-content: center;
-}
-
-.btn-confirm {
-    background: #ff5f5f;
-    color: white;
-    padding: 6px 20px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-cancel {
-    background: transparent;
-    border: 1px solid var(--text-color);
-    color: var(--text-color);
-    padding: 6px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
-
-/* --- تنظیمات واکنش‌گرا (Mobile) --- */
-@media (max-width: 768px) {
-    .sidebar {
-        transform: translateX(260px); /* در موبایل پیش‌فرض بسته */
-    }
-    
-    .sidebar.active {
-        transform: translateX(0); /* با دکمه باز می‌شود */
-    }
-
-    .dashboard-main {
-        margin-right: 0;
-        padding: 20px;
-    }
-
-    .announcements-container {
-        max-width: 100%; /* در موبایل تمام عرض می‌شود برای خوانایی */
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* --- Room Details Page Styles --- */
+/* --- صفحه جزئیات اتاق (My Room) --- */
 .room-details-container {
-    max-width: 800px; /* برای اینکه در وسط صفحه و خوانا باشد */
+    max-width: 850px;
     margin: 0 auto;
 }
 
-/* شبکه اطلاعات اصلی */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -410,29 +307,14 @@ h1.main-title {
     padding: 20px;
     border-radius: 15px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
-.detail-card.accent {
-    border: 1px solid var(--third-color);
-}
+.detail-card.accent { border: 1px solid var(--third-color); }
 
-.detail-card .label {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--text-color);
-    opacity: 0.6;
-    margin-bottom: 8px;
-}
+.detail-card .label { display: block; font-size: 0.8rem; opacity: 0.6; margin-bottom: 5px; }
+.detail-card .value { font-size: 1rem; font-weight: bold; }
 
-.detail-card .value {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--white-color);
-}
-
-/* لیست هم‌اتاقی‌ها */
 .roommates-section {
     background: var(--secondary-color);
     border-radius: 15px;
@@ -444,98 +326,49 @@ h1.main-title {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
 }
 
-.capacity-tag {
-    background: var(--third-color);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    color: white;
-}
+.capacity-tag { background: var(--third-color); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; }
 
 .roommate-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .roommate-item:last-child { border-bottom: none; }
 
-.roommate-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+.roommate-info { display: flex; align-items: center; gap: 10px; }
 
-.small-avatar {
-    width: 35px;
-    height: 35px;
-    background: #3a3a5a;
-    border-radius: 50%;
-}
+.small-avatar { width: 35px; height: 35px; background: var(--primary-color); border-radius: 50%; }
 
-.student-id {
-    font-size: 0.8rem;
-    color: var(--text-color);
-    opacity: 0.5;
-}
-
-.empty-msg {
-    text-align: center;
-    color: var(--text-color);
-    opacity: 0.6;
-    font-size: 0.9rem;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* --- Filter Section --- */
+/* --- صفحه انتخاب اتاق (Select Room - Horizontal List) --- */
 .filter-section {
     background: var(--secondary-color);
-    max-width: 800px; /* عرض را از 400 به 650 تغییر دهید */
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 30px;
-    margin: 0 auto;
-    text-align: center;
-
+    max-width: 800px;
+    /* این دو خط باعث وسط‌چین شدن می‌شوند */
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .filter-form {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .filter-group {
     display: flex;
     gap: 10px;
-    flex: 1;
+    flex-grow: 1;
 }
 
 .filter-group select {
@@ -544,79 +377,100 @@ h1.main-title {
     border: 1px solid rgba(255,255,255,0.1);
     padding: 10px;
     border-radius: 8px;
-    outline: none;
-    font-family: "vazir";
     flex: 1;
+}
+
+.sort-container {
+    display: flex;
+    gap: 5px;
+    background: var(--primary-color);
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.sort-toggle-btn {
+    background: transparent;
+    color: var(--text-color);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.sort-toggle-btn.active {
+    background: var(--third-color);
+    color: white;
+    font-weight: bold;
 }
 
 .filter-submit-btn {
     background: var(--third-color);
     color: white;
-    border: none;
     padding: 10px 25px;
     border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* --- Rooms List --- */
-.rooms-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.room-selection-card {
-    background: var(--secondary-color);
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.05);
-    transition: 0.3s;
-}
-
-.room-selection-card:hover { transform: translateY(-5px); border-color: var(--third-color); }
-
-.room-main-info h3 { color: var(--third-color); margin-bottom: 5px; }
-.room-main-info span { font-size: 0.85rem; opacity: 0.7; }
-
-.room-stats {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-    padding: 10px 0;
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.stat .label { display: block; font-size: 0.75rem; opacity: 0.6; }
-.stat .value { font-weight: bold; color: var(--white-color); }
-
-.select-room-btn {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
     border: none;
+    cursor: pointer;
+}
+
+/* کارت‌های افقی */
+.rooms-list-horizontal {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.room-row-card {
+    background: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: 0.2s;
+}
+
+.room-row-card:hover { border-color: var(--third-color); }
+
+.room-info-side h3 { font-size: 1.1rem; color: var(--third-color); }
+.room-info-side p { font-size: 0.85rem; opacity: 0.6; }
+
+.room-stats-side { display: flex; gap: 50px; }
+.stat-item { text-align: center; }
+.stat-item .label { display: block; font-size: 0.75rem; opacity: 0.5; }
+.stat-item .value { font-size: 0.95rem; font-weight: bold; }
+
+.select-btn-sm {
     background: var(--third-color);
     color: white;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.select-room-btn:disabled { background: #444; cursor: not-allowed; }
-
-/* --- Pagination --- */
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 40px;
-}
-
-.page-link {
-    padding: 8px 15px;
-    background: var(--secondary-color);
-    color: var(--text-color);
+    padding: 8px 25px;
     border-radius: 6px;
-    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    min-width: 110px;
 }
 
-.page-link.active, .page-link:hover { background: var(--third-color); color: white; }
+/* --- پاپ‌آپ و صفحه‌بندی --- */
+.modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+    display: flex; justify-content: center; align-items: center;
+    visibility: hidden; opacity: 0; z-index: 2000;
+}
+.modal-overlay.show { visibility: visible; opacity: 1; }
+.modal-card { background: var(--secondary-color); padding: 30px; border-radius: 15px; text-align: center; width: 300px; }
+
+.pagination { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
+.page-link { padding: 8px 16px; background: var(--secondary-color); border-radius: 6px; color: var(--text-color); }
+.page-link.active { background: var(--third-color); color: white; }
+
+/* --- واکنش‌گرایی --- */
+@media (max-width: 768px) {
+    .sidebar { transform: translateX(260px); }
+    .sidebar.active { transform: translateX(0); }
+    .dashboard-main { margin-right: 0; padding: 20px; }
+    .room-row-card { flex-direction: column; gap: 15px; text-align: center; }
+    .room-stats-side { gap: 20px; }
+    .filter-group { flex-direction: column; width: 100%; }
+}

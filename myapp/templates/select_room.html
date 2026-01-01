@@ -4,6 +4,8 @@
 {% block title %}انتخاب اتاق{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <div class="dashboard-wrapper">
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -13,14 +15,16 @@
         </div>
 
         <ul class="nav-links">
-            <li><a href="{% url 'dashboard_' %}" >داشبورد</a></li>
-            <li><a href="{% url 'my_room_' %}" >اتاق من</a></li>
-            <li><a href="{% url 'select_room_' %}">انتخاب اتاق</a></li>
+            <li><a href="{% url 'dashboard_' %}">داشبورد</a></li>
+            <li><a href="{% url 'my_room_' %}">اتاق من</a></li>
+            <li><a href="{% url 'select_room_' %}" class="active">انتخاب اتاق</a></li>
         </ul>
 
         <div class="sidebar-footer">
             <div class="user-profile">
-                <img src="{% static 'images/user.png' %}" alt="User" class="avatar">
+                <div class="profile-icon-box">
+                    <i class="fa-solid fa-circle-user"></i>
+                </div>
                 <span class="user-name">{{ request.user.get_full_name|default:"کاربر مهمان" }}</span>
             </div>
             <button onclick="toggleLogoutModal()" class="logout-btn">خروج از حساب</button>
@@ -36,7 +40,7 @@
         </header>
 
         <section class="filter-section">
-            <form method="GET" class="filter-form">
+            <form method="GET" class="filter-form" id="filter-form">
                 <div class="filter-group">
                     <select name="dorm">
                         <option value="">همه خوابگاه‌ها</option>
@@ -51,46 +55,67 @@
                         <option value="1">طبقه اول</option>
                         <option value="2">طبقه دوم</option>
                     </select>
-                    <select name="sort">
-                        <option value="cheap">ارزان‌ترین</option>
-                        <option value="expensive">گران‌ترین</option>
-                    </select>
+                    
+                    <div class="sort-container">
+                        <input type="hidden" name="sort" id="sort-input" value="{{ request.GET.sort|default:'cheap' }}">
+                        <button type="button" class="sort-toggle-btn {% if request.GET.sort != 'expensive' %}active{% endif %}" onclick="updateSort('cheap', this)">ارزان‌ترین</button>
+                        <button type="button" class="sort-toggle-btn {% if request.GET.sort == 'expensive' %}active{% endif %}" onclick="updateSort('expensive', this)">گران‌ترین</button>
+                    </div>
                 </div>
                 <button type="submit" class="filter-submit-btn">اعمال فیلتر</button>
             </form>
         </section>
 
-        <div class="rooms-list">
+        <div class="rooms-list-horizontal">
             {% for room in rooms %}
-            <div class="room-selection-card">
-                <div class="room-main-info">
+            <div class="room-row-card">
+                <div class="room-info-side">
                     <h3>اتاق {{ room.number }}</h3>
-                    <span>{{ room.dorm_name }} - {{ room.block }} - طبقه {{ room.floor }}</span>
+                    <p>{{ room.dorm_name }} | {{ room.block }} | طبقه {{ room.floor }}</p>
                 </div>
-                <div class="room-stats">
-                    <div class="stat">
-                        <span class="label">ظرفیت:</span>
+                
+                <div class="room-stats-side">
+                    <div class="stat-item">
+                        <span class="label">ظرفیت</span>
                         <span class="value">{{ room.occupied }}/{{ room.capacity }}</span>
                     </div>
-                    <div class="stat">
-                        <span class="label">قیمت:</span>
+                    <div class="stat-item">
+                        <span class="label">قیمت</span>
                         <span class="value">{{ room.price }} تومان</span>
                     </div>
                 </div>
-                <button class="select-room-btn" {% if room.occupied >= room.capacity %}disabled{% endif %}>
-                    {% if room.occupied >= room.capacity %}ظرفیت تکمیل{% else %}انتخاب اتاق{% endif %}
-                </button>
+
+                <div class="room-action-side">
+                    <button class="select-btn-sm" {% if room.occupied >= room.capacity %}disabled{% endif %}>
+                        {% if room.occupied >= room.capacity %}تکمیل{% else %}انتخاب{% endif %}
+                    </button>
+                </div>
             </div>
+            {% empty %}
+            <p style="text-align: center; opacity: 0.5;">اتاقی یافت نشد.</p>
             {% endfor %}
         </div>
 
         <div class="pagination">
             <a href="#" class="page-link">&laquo; قبلی</a>
             <a href="#" class="page-link active">1</a>
-            <a href="#" class="page-link">2</a>
-            <a href="#" class="page-link">3</a>
             <a href="#" class="page-link">بعدی &raquo;</a>
         </div>
     </main>
 </div>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('closed');
+        document.getElementById('main-content').classList.toggle('wide');
+    }
+
+    function updateSort(value, btn) {
+        document.getElementById('sort-input').value = value;
+        document.querySelectorAll('.sort-toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // در صورت تمایل برای ارسال خودکار فرم پس از کلیک:
+        // document.getElementById('filter-form').submit();
+    }
+</script>
 {% endblock %}

@@ -30,7 +30,7 @@
                             <div class="profile-icon-box">
                                 <i class="fa-solid fa-circle-user"></i>
                             </div>
-                            <span class="user-name">{{ request.user.get_full_name|default:"کاربر مهمان" }}</span>
+                            <a class="user-name" href="{% url 'profile_' %}">{{ request.user.get_full_name|default:"کاربر مهمان" }}</a>
                         </div>
                         <button onclick="toggleLogoutModal()" class="logout-btn">خروج از حساب</button>
                     </div>

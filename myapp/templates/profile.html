@@ -1,0 +1,67 @@
+{% extends 'patterns/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}پروفایل من{% endblock %}
+
+{% block content %}
+    <main class="dashboard-main" id="main-content">
+        <header class="dashboard-top-nav">
+            <button id="sidebar-toggle" class="toggle-btn" onclick="toggleSidebar()">
+                <span></span><span></span><span></span>
+            </button>
+            <h2 class="page-title"> پروفایل </h2>
+        </header>
+
+        <div class="profile-container">
+            <div class="login-card" style="max-width: 600px; margin-top: 0;"> 
+                <div class="profile-header">
+                    <div class="large-avatar">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </div>
+                    <p style="margin-bottom: 20px; opacity: 0.8;">اطلاعات کاربری خود را در این بخش مشاهده و ویرایش کنید.</p>
+                </div>
+
+                <form action="{% url 'profile_' %}" method="POST" class="register-form">
+                    {% csrf_token %}
+                    
+                    <div class="input-group">
+                        <label for="first-name">نام</label>
+                        <input type="text" id="first-name" name="first_name" value="{{ user.first_name }}" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="last-name">نام خانوادگی</label>
+                        <input type="text" id="last-name" name="last_name" value="{{ user.last_name }}" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="student-id">کد دانشجویی (غیرقابل تغییر)</label>
+                        <input type="text" id="student-id" value="{{ user.student_id }}" disabled style="background-color: #f0f0f0; cursor: not-allowed;">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="national-id">کد ملی</label>
+                        <input type="text" id="national-id" name="national_id" value="{{ user.national_id }}">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="phone">شماره تماس</label>
+                        <input type="text" id="phone" name="phone_number" value="{{ user.phone_number }}" placeholder="مثال: 09123456789">
+                    </div>
+                    
+
+                    <div class="input-group">
+                        <label for="phone">ایمیل </label>
+                        <input type="text" id="phone" name="phone_number" value="{{ user.phone_number }}" >
+                    </div>
+                    
+                <div class="profile-actions-row">
+                    <a href="{% url 'change_password_' %}" class="btn-secondary-sm">تغییر رمز ورود</a>
+                    
+                    <button type="submit" class="btn-submit-sm">ذخیره تغییرات</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

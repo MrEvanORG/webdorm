@@ -10,4 +10,6 @@ urlpatterns = [
     path("dashboard/view_room/<int:pk>/",views.view_room,name="view_room_"),
     path("dashboard/book_room/<int:pk>/", views.book_room, name="book_room_action"),
     path("logout", views.logout_user, name="logout"), 
+    path('dashboard/profile/', views.profile_view, name='profile_'),
+    path('dashboard/profile/change_password', views.change_password, name='change_password_'),
 ]

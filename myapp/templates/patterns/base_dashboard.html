@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link href="{% static 'css/fonts.css' %}" rel="stylesheet">
+        <title>{% block title %}{% endblock %} - مدیریت خوابگاه</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <aside class="sidebar" id="sidebar">
+                    <div class="sidebar-header">
+                        <div class="logo-box">
+                            <span class="brand-name">پنل مدیریت خوابگاه</span>
+                        </div>
+                    </div>
+
+                    <ul class="nav-links">
+                        <li><a href="{% url 'dashboard_' %}" >خانه</a></li>
+                        <li><a href="{% url 'my_room_' %}" >اتاق من</a></li>
+                        <li><a href="{% url 'select_room_' %}">انتخاب اتاق</a></li>
+                    </ul>
+
+                    <div class="sidebar-footer">
+                        <div class="user-profile">
+                            <div class="profile-icon-box">
+                                <i class="fa-solid fa-circle-user"></i>
+                            </div>
+                            <span class="user-name">{{ request.user.get_full_name|default:"کاربر مهمان" }}</span>
+                        </div>
+                        <button onclick="toggleLogoutModal()" class="logout-btn">خروج از حساب</button>
+                    </div>
+                </aside>
+            {% block content %}
+            {% endblock %}
+            <div id="logoutModal" class="modal-overlay">
+                <div class="modal-card">
+                    <h3>خروج</h3>
+                    <p>آیا مایل به خروج هستید؟</p>
+                    <div class="modal-actions">
+                        <a href="{% url 'logout' %}" class="btn-confirm">بله</a>
+                        <button onclick="toggleLogoutModal()" class="btn-cancel">خیر</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/dashboard.js' %}"></script>
+        {% block script %}{% endblock %}
+    </body>
+</html>

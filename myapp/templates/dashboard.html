@@ -1,82 +1,43 @@
-{% extends 'patterns/base.html' %}
+{% extends 'patterns/base_dashboard.html' %}
 {% load static %}
 
+{% block title %}خانه{% endblock %}
+
 {% block content %}
-<div class="dashboard-wrapper">
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo-box">
-                <span class="brand-name">webdorm</span>
-            </div>
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="{% url 'dashboard_' %}" >داشبورد</a></li>
-            <li><a href="{% url 'my_room_' %}" >اتاق من</a></li>
-            <li><a href="{% url 'select_room_' %}">انتخاب اتاق</a></li>
-        </ul>
-
-        <div class="sidebar-footer">
-            <div class="user-profile">
-                <img src="{% static 'images/user.png' %}" alt="User" class="avatar">
-                <span class="user-name">{{ request.user.get_full_name|default:"کاربر مهمان" }}</span>
-            </div>
-            <button onclick="toggleLogoutModal()" class="logout-btn">خروج از حساب</button>
-        </div>
-    </aside>
-
     <main class="dashboard-main" id="main-content">
         <header class="dashboard-top-nav">
             <button id="sidebar-toggle" class="toggle-btn" onclick="toggleSidebar()">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
-            <h2 class="page-title">داشبورد</h2>
+            <h2 class="page-title">خانه</h2>
         </header>
+
+        {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="{% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}">
+                    <i class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% else %}fa-circle-exclamation{% endif %}"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
 
         <section class="announcements-container">
             <h3 class="section-subtitle">اطلاعیه‌ها</h3>
-            
+            {% for notice in notices %}
             <div class="announcement-card">
-                <h4>تخلیه خوابگاه</h4>
-                <p>دانشجویان محترم تا پایان هفته نسبت به تخلیه اقدام کنند.</p>
-                <span class="announcement-date">1402/10/10</span> </div>
+                <h4>{{ notice.title }}</h4>
+                <p>{{ notice.text }}</p>
+                <span class="announcement-date">{{ notice.date_modified|date:"Y/m/d" }}</span>
             </div>
-
-            <div class="announcement-card">
-                <h4>شارژ اینترنت</h4>
-                <p>ترافیک هدیه نیمسال جدید فعال شد.</p>
-                <span class="announcement-date">1402/10/11</span> </div>
+            {% empty %}
+            <div class="empty-state" style="text-align: center; padding: 40px; opacity: 0.7;">
+                <i class="fa-solid fa-bullhorn" style="font-size: 3rem; margin-bottom: 15px; color: #ccc;"></i>
+                <p>در حال حاضر اطلاعیه‌ای وجود ندارد.</p>
             </div>
+            {% endfor %}
         </section>
     </main>
 </div>
-
-<div id="logoutModal" class="modal-overlay">
-    <div class="modal-card">
-        <h3>خروج</h3>
-        <p>آیا مایل به خروج هستید؟</p>
-        <div class="modal-actions">
-            <a href="{% url 'index_' %}" class="btn-confirm">بله</a>
-            <button onclick="toggleLogoutModal()" class="btn-cancel">خیر</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('main-content');
-        
-        // سوئیچ کردن کلاس‌ها برای دسکتاپ و موبایل
-        sidebar.classList.toggle('closed'); 
-        sidebar.classList.toggle('active'); 
-        mainContent.classList.toggle('wide');
-    }
-
-    function toggleLogoutModal() {
-        document.getElementById('logoutModal').classList.toggle('show');
-    }
-</script>
 {% endblock %}

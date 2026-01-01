@@ -1,4 +1,3 @@
-/* --- بخش متغیرها و تنظیمات کلی --- */
 @import url('root/light_root.css');
 
 * {
@@ -22,7 +21,63 @@ button, input, a, select {
     outline: none;
 }
 
-/* --- استایل‌های صفحات ورود و ثبت‌نام (Index & Sign up) --- */
+.btn-confirm {
+    background: #ff5f5f;
+    color: white;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.3s ease;
+}
+
+.btn-confirm:hover {
+    background: #e04e4e;
+}
+
+.btn-cancel {
+    background: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 8px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.messages-container {
+    margin-bottom: 25px;
+}
+
+.alert-success, .alert-error {
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
 h1.main-title {
     text-align: center;
     margin-top: 40px;
@@ -47,11 +102,11 @@ h1.main-title {
     font-size: 1.3rem;
     border-bottom: 2px solid var(--third-color);
     display: inline-block;
-    padding-bottom: 5px;
+    padding-bottom: 8px;
 }
 
 .input-group {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     text-align: right;
 }
 
@@ -59,7 +114,7 @@ h1.main-title {
     display: block;
     color: var(--text-color);
     margin-bottom: 8px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
 }
 
 .input-group input {
@@ -72,12 +127,12 @@ h1.main-title {
 }
 
 .span-error {
-    display: block;              
-    color: #ff5f5f;           
-    font-size: 0.8rem;        
-    margin-top: -10px;        
-    margin-bottom: 10px;         
-    text-align: right;         
+    display: block;
+    color: #ff5f5f;
+    font-size: 0.85rem;
+    margin-top: -12px;
+    margin-bottom: 15px;
+    text-align: right;
 }
 
 .login-button {
@@ -90,26 +145,29 @@ h1.main-title {
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    font-size: 1rem;
+}
+
+.login-button:hover {
+    opacity: 0.9;
 }
 
 .extra-text {
-    margin-top: 15px;
+    margin-top: 20px;
     color: var(--white-color);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
 }
 
 .extra-text a {
     color: var(--third-color);
 }
 
-/* --- ساختار کلی داشبورد --- */
 .dashboard-wrapper {
     display: flex;
     min-height: 100vh;
     position: relative;
 }
 
-/* --- سایدبار (Sidebar) --- */
 .sidebar {
     width: 260px;
     background-color: var(--secondary-color);
@@ -134,7 +192,7 @@ h1.main-title {
 }
 
 .brand-name {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--third-color);
     letter-spacing: 1px;
@@ -151,8 +209,8 @@ h1.main-title {
     display: block;
     padding: 12px 15px;
     border-radius: 8px;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
     transition: 0.3s;
 }
 
@@ -161,9 +219,8 @@ h1.main-title {
     color: white;
 }
 
-/* --- پروفایل و آیکون در سایدبار --- */
 .sidebar-footer {
-    padding: 15px 20px;
+    padding: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -171,18 +228,18 @@ h1.main-title {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .profile-icon-box {
-    font-size: 28px;
+    font-size: 32px;
     color: var(--third-color);
     display: flex;
     align-items: center;
 }
 
 .user-name {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--text-color);
     white-space: nowrap;
     font-weight: 500;
@@ -190,13 +247,13 @@ h1.main-title {
 
 .logout-btn {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     background: transparent;
     border: 1px solid #ff5f5f;
     color: #ff5f5f;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: bold;
     transition: 0.3s;
 }
@@ -206,7 +263,6 @@ h1.main-title {
     color: white;
 }
 
-/* --- محتوای اصلی داشبورد --- */
 .dashboard-main {
     flex: 1;
     margin-right: 260px;
@@ -228,68 +284,66 @@ h1.main-title {
 .toggle-btn {
     background: var(--secondary-color);
     border: 1px solid var(--third-color);
-    padding: 8px;
-    border-radius: 6px;
+    padding: 10px;
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
 }
 
 .toggle-btn span {
-    width: 20px;
+    width: 22px;
     height: 2px;
     background: var(--third-color);
     display: block;
 }
 
-/* --- بخش اطلاعیه‌ها (Centered & Date at Bottom-Left) --- */
 .announcements-container {
     max-width: 800px;
     margin: 0 auto;
 }
 
 .section-subtitle {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: var(--text-color);
-    opacity: 0.7;
-    font-size: 0.95rem;
+    opacity: 0.8;
+    font-size: 1rem;
     text-align: center;
 }
 
 .announcement-card {
     background: var(--secondary-color);
-    padding: 20px;
-    padding-bottom: 35px; /* فضا برای تاریخ */
+    padding: 25px;
+    padding-bottom: 40px;
     border-radius: 12px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border-right: 4px solid var(--third-color);
     text-align: right;
     position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .announcement-card h4 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--third-color);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .announcement-card p {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.8;
 }
 
 .announcement-date {
     position: absolute;
-    bottom: 10px;
-    left: 15px;
-    font-size: 0.75rem;
-    opacity: 0.4;
+    bottom: 15px;
+    left: 20px;
+    font-size: 0.8rem;
+    opacity: 0.5;
     color: var(--text-color);
 }
 
-/* --- صفحه جزئیات اتاق (My Room) --- */
 .room-details-container {
     max-width: 850px;
     margin: 0 auto;
@@ -304,58 +358,158 @@ h1.main-title {
 
 .detail-card {
     background: var(--secondary-color);
-    padding: 20px;
-    border-radius: 15px;
+    padding: 25px;
+    border-radius: 12px;
     text-align: center;
     border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.detail-card.accent { border: 1px solid var(--third-color); }
+.detail-card.accent {
+    border: 1px solid var(--third-color);
+}
 
-.detail-card .label { display: block; font-size: 0.8rem; opacity: 0.6; margin-bottom: 5px; }
-.detail-card .value { font-size: 1rem; font-weight: bold; }
+.detail-card .label {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-bottom: 8px;
+}
+
+.detail-card .value {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
 
 .roommates-section {
     background: var(--secondary-color);
-    border-radius: 15px;
-    padding: 25px;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
-.capacity-tag { background: var(--third-color); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; }
+.capacity-tag {
+    background: var(--third-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: white;
+}
+
+.roommates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .roommate-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.roommate-item:last-child { border-bottom: none; }
+.roommate-item:last-child {
+    border-bottom: none;
+}
 
-.roommate-info { display: flex; align-items: center; gap: 10px; }
+.roommate-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-.small-avatar { width: 35px; height: 35px; background: var(--primary-color); border-radius: 50%; }
+.small-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
 
-/* --- صفحه انتخاب اتاق (Select Room - Horizontal List) --- */
+.action-container {
+    margin-top: 30px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.btn-disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed;
+    color: #666;
+}
+
+.btn-action-lg {
+    text-decoration: none;
+    display: inline-block;
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    background-color: var(--third-color);
+    color: white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-action-lg:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.empty-msg {
+    padding: 30px;
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.no-room-wrapper {
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 12px;
+    background: var(--secondary-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.alert-large-icon {
+    font-size: 4.5rem;
+    color: #ccc;
+    margin-bottom: 25px;
+    display: block;
+}
+
+.btn-back-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
 .filter-section {
     background: var(--secondary-color);
-    padding: 20px;
+    padding: 25px;
     border-radius: 12px;
     margin-bottom: 30px;
-    max-width: 800px;
-    /* این دو خط باعث وسط‌چین شدن می‌شوند */
+    max-width: 950px;
     margin-right: auto;
     margin-left: auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .filter-form {
@@ -367,7 +521,7 @@ h1.main-title {
 
 .filter-group {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex-grow: 1;
 }
 
@@ -375,50 +529,25 @@ h1.main-title {
     background: var(--primary-color);
     color: var(--text-color);
     border: 1px solid rgba(255,255,255,0.1);
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     flex: 1;
-}
-
-.sort-container {
-    display: flex;
-    gap: 5px;
-    background: var(--primary-color);
-    padding: 4px;
-    border-radius: 8px;
-}
-
-.sort-toggle-btn {
-    background: transparent;
-    color: var(--text-color);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: 0.3s;
-}
-
-.sort-toggle-btn.active {
-    background: var(--third-color);
-    color: white;
-    font-weight: bold;
 }
 
 .filter-submit-btn {
     background: var(--third-color);
     color: white;
-    padding: 10px 25px;
+    padding: 12px 25px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
+    font-weight: 500;
 }
 
-/* کارت‌های افقی */
 .rooms-list-horizontal {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
 }
 
 .room-row-card {
@@ -426,51 +555,151 @@ h1.main-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 30px;
+    padding: 20px 30px;
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.05);
     transition: 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 
-.room-row-card:hover { border-color: var(--third-color); }
+.room-row-card:hover {
+    border-color: var(--third-color);
+    transform: translateY(-2px);
+}
 
-.room-info-side h3 { font-size: 1.1rem; color: var(--third-color); }
-.room-info-side p { font-size: 0.85rem; opacity: 0.6; }
+.room-info-side h3 {
+    font-size: 1.2rem;
+    color: var(--third-color);
+    margin-bottom: 5px;
+}
 
-.room-stats-side { display: flex; gap: 50px; }
-.stat-item { text-align: center; }
-.stat-item .label { display: block; font-size: 0.75rem; opacity: 0.5; }
-.stat-item .value { font-size: 0.95rem; font-weight: bold; }
+.room-info-side p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.room-stats-side {
+    display: flex;
+    gap: 50px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item .label {
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-bottom: 4px;
+}
+
+.stat-item .value {
+    font-size: 1rem;
+    font-weight: bold;
+}
 
 .select-btn-sm {
     background: var(--third-color);
     color: white;
-    padding: 8px 25px;
-    border-radius: 6px;
+    padding: 10px 25px;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
-    min-width: 110px;
+    min-width: 120px;
+    font-size: 0.9rem;
+    transition: 0.2s;
 }
 
-/* --- پاپ‌آپ و صفحه‌بندی --- */
+.select-btn-sm:hover {
+    opacity: 0.9;
+}
+
 .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-    display: flex; justify-content: center; align-items: center;
-    visibility: hidden; opacity: 0; z-index: 2000;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 2000;
+    transition: all 0.3s;
 }
-.modal-overlay.show { visibility: visible; opacity: 1; }
-.modal-card { background: var(--secondary-color); padding: 30px; border-radius: 15px; text-align: center; width: 300px; }
 
-.pagination { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
-.page-link { padding: 8px 16px; background: var(--secondary-color); border-radius: 6px; color: var(--text-color); }
-.page-link.active { background: var(--third-color); color: white; }
+.modal-overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
 
-/* --- واکنش‌گرایی --- */
+.modal-card {
+    background: var(--secondary-color);
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.page-link {
+    padding: 8px 16px;
+    background: var(--secondary-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    transition: 0.2s;
+}
+
+.page-link.active {
+    background: var(--third-color);
+    color: white;
+}
+
+.page-link:hover:not(.active):not(.disabled) {
+    background: rgba(255,255,255,0.1);
+}
+
 @media (max-width: 768px) {
-    .sidebar { transform: translateX(260px); }
-    .sidebar.active { transform: translateX(0); }
-    .dashboard-main { margin-right: 0; padding: 20px; }
-    .room-row-card { flex-direction: column; gap: 15px; text-align: center; }
-    .room-stats-side { gap: 20px; }
-    .filter-group { flex-direction: column; width: 100%; }
+    .sidebar {
+        transform: translateX(260px);
+    }
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    .dashboard-main {
+        margin-right: 0;
+        padding: 20px;
+    }
+    .room-row-card {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .room-stats-side {
+        gap: 30px;
+    }
+    .filter-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    .room-action-side {
+        width: 100%;
+    }
+    .select-btn-sm {
+        width: 100%;
+    }
 }

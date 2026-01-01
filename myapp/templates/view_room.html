@@ -1,7 +1,7 @@
 {% extends 'patterns/base_dashboard.html' %}
 {% load static %}
 
-{% block title %}اتاق من{% endblock %}
+{% block title %}اطلاعات اتاق {{ room.number }}{% endblock %}
 
 {% block content %}
     <main class="dashboard-main" id="main-content">
@@ -9,7 +9,7 @@
             <button id="sidebar-toggle" class="toggle-btn" onclick="toggleSidebar()">
                 <span></span><span></span><span></span>
             </button>
-            <h2 class="page-title">جزئیات اتاق من</h2>
+            <h2 class="page-title">جزئیات اتاق {{ room.number }}</h2>
         </header>
 
         <div class="room-details-container">
@@ -35,7 +35,7 @@
 
             <div class="roommates-section">
                 <div class="section-header">
-                    <h3>هم‌اتاقی‌ها</h3>
+                    <h3>افراد ساکن در اتاق</h3>
                     <span class="capacity-tag">ظرفیت: {{ room.current_occupancy }}/{{ room.capacity }}</span>
                 </div>
                 
@@ -49,16 +49,30 @@
                         <span class="student-id">{{ roommate.student_code }}</span>
                     </div>
                     {% empty %}
-                    <p class="empty-msg">در حال حاضر هم‌اتاقی ندارید.</p>
+                    <p class="empty-msg">در حال حاضر کسی در این اتاق ساکن نیست.</p>
                     {% endfor %}
                 </div>
             </div>
+
+            <div class="action-container">
+                {% if room.current_occupancy >= room.capacity %}
+                    <button class="select-btn-sm btn-disabled" disabled>
+                        ظرفیت تکمیل است
+                    </button>
+                {% else %}
+                    <a href="{% url 'book_room_action' room.pk %}" 
+                       class="select-btn-sm btn-action-lg" 
+                       onclick="return confirm('آیا از انتخاب قطعی اتاق شماره {{ room.number }} اطمینان دارید؟')">
+                       تایید و انتخاب نهایی اتاق
+                    </a>
+                {% endif %}
+            </div>
+
             {% else %}
-            <div class="no-room-alert" style="text-align: center; padding: 50px; border-radius: 12px;">
-                <i class="fa-solid fa-bed" style="font-size: 4rem; color: #ccc; margin-bottom: 20px; display: block;"></i>
-                <h3>شما هنوز اتاقی انتخاب نکرده‌اید</h3>
-                <p>برای رزرو تخت، به بخش انتخاب اتاق مراجعه کنید.</p>
-                <a href="{% url 'select_room_' %}" class="btn-confirm" style="display: inline-block; margin-top: 15px; text-decoration: none;color:var(--text-color);">> رزرو اتاق <</a>
+            <div class="no-room-wrapper">
+                <i class="fa-solid fa-circle-exclamation alert-large-icon"></i>
+                <h3>اطلاعات اتاق یافت نشد</h3>
+                <a href="{% url 'select_room_' %}" class="btn-confirm btn-back-link">بازگشت به لیست اتاق‌ها</a>
             </div>
             {% endif %}
         </div>

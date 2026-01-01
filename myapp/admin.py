@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Dorm, Block, Room, OtherInfo
+from .models import User, Dorm, Block, Room, OtherInfo , Notice
 from django.forms.models import BaseInlineFormSet
 
 class WebDormAdminSite(admin.AdminSite):
@@ -13,7 +13,7 @@ class WebDormAdminSite(admin.AdminSite):
         for app in app_list:
             if app['app_label'] == 'myapp':
                 app['name'] = 'مدیریت خوابگاه'
-                custom_order = ['User', 'Dorm', 'Block', 'Room', 'OtherInfo']
+                custom_order = ['User', 'Dorm', 'Block', 'Room','Notice' 'OtherInfo']
                 app['models'].sort(key=lambda x: custom_order.index(x['object_name']) if x['object_name'] in custom_order else len(custom_order))
         return app_list
 
@@ -125,3 +125,9 @@ class RoomAdmin(admin.ModelAdmin):
 class OtherInfoAdmin(admin.ModelAdmin):
     list_display = ('start_selectroom_event', 'end_selectroom_event')
     def has_add_permission(self, request): return not OtherInfo.objects.exists()
+
+@admin.register(Notice, site=super_admin_site)
+class NoticeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'text')
+
+

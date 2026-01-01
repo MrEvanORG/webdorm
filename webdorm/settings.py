@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from decouple import config
 from pathlib import Path
-import os
 import platform
+import os
+
 system = platform.system()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,8 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lxlj47+z5-w*3r^2eleglb75+!%u=73*$@(=-8u2c*4qwb%q0g' #must be hidden
-
+SECRET_KEY = config("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -134,6 +135,6 @@ SITE_ID = 1
 if not system == "Windows":
     FORCE_SCRIPT_NAME = '/webdorm'
 
-STATIC_URL = 'webdorm/static/'
+STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'

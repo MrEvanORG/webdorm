@@ -148,3 +148,17 @@ class Room(models.Model):
         verbose_name = "اتاق"
         verbose_name_plural = "اتاق ها"
         ordering = ['number']
+
+class Notice(models.Model):
+    title = models.CharField(max_length=128,verbose_name='عنوان')
+    text = models.TextField(verbose_name='متن')
+    date_modified = models.DateField(verbose_name='زمان بارگذاری',auto_now_add=True)
+
+    def __str__(self):
+        return f"اطلاعیه {self.title}"
+    
+    class Meta:
+        verbose_name = "اطلاعیه"
+        verbose_name_plural = "اطلاعیه ها"
+        ordering = ['-date_modified']
+    

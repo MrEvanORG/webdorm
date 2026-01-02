@@ -6,6 +6,8 @@ from .models import User, Notice, Room, Dorm, Block ,OtherInfo
 from django.core.paginator import Paginator
 from django.db.models import Count, F ,Max
 from django.utils import timezone
+from django.contrib.auth import update_session_auth_hash
+from .forms import ChangePasswordForm, UserProfileForm
 from django.contrib import messages
 
 def index_page(request):
@@ -161,8 +163,28 @@ def select_room_page(request):
 
 @login_required(login_url='index_')
 def view_room(request,pk):
+    #دانشجویان فقط در زمان انتخاب اتاق میتوانند اتاق هارا ببیننذ
     user = request.user
     room = get_object_or_404(Room,pk=pk)
+    config = OtherInfo.get_instance()
+    now  = timezone.now()
+
+    if not user.payed_cost:
+        messages.error(request, "شما هنوز هزینه خوابگاه را پرداخت نکرده‌اید و مجاز به رزرو نیستید.")
+        return redirect('select_room_')
+
+    if config.start_selectroom_event and now < config.start_selectroom_event:
+        messages.error(request, "زمان انتخاب اتاق هنوز فرا نرسیده است.")
+        return redirect('select_room_')
+    
+    if config.end_selectroom_event and now > config.end_selectroom_event:
+        messages.error(request, "مهلت انتخاب اتاق به پایان رسیده است.")
+        return redirect('select_room_')
+
+    if not room.is_active:
+        messages.error(request, "این اتاق غیرفعال شده است.")
+        return redirect('select_room_')
+    
     roommates = []
     
     if room:
@@ -232,14 +254,46 @@ def dashboard_page(request):
     }
     return render(request, "dashboard.html",context)
 
+@login_required(login_url='index_') 
+def profile_view(request):
+    user = request.user
+    
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST)
+        if form.is_valid():
+            form.save_profile(user)
+            messages.success(request, "اطلاعات پروفایل با موفقیت بروزرسانی شد.")
+            return redirect('profile_')
+    else:
+        initial_data = {
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email 
+        }
+        form = UserProfileForm(initial=initial_data)
+
+    return render(request, 'profile.html', {'form': form})
+
+@login_required(login_url='index_') 
+def change_password(request):
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.user, request.POST)
+        if form.is_valid():
+            user = request.user
+            new_password = form.cleaned_data['new_password']
+            user.set_password(new_password)
+            user.save()
+            
+            # ino ai goft niaz darim chon onjori test kardim karbar logout mishod !!!
+            update_session_auth_hash(request, user)
+            
+            messages.success(request, "رمز عبور شما با موفقیت تغییر کرد.")
+            return redirect('profile_')
+    else:
+        form = ChangePasswordForm(request.user)
+
+    return render(request, 'change_password.html', {'form': form})
+
 def logout_user(request):
     logout(request)
     return redirect('index_')
-
-
-def profile_view(request):
-    return render(request, 'profile.html')
-
-
-def change_password(request):
-    return render(request, 'change_password.html')

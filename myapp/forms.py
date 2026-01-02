@@ -1,5 +1,7 @@
 from django import forms
 from .models import User
+from django.core.validators import EmailValidator
+from django.core.exceptions import ValidationError
 
 def fix_numbers(text):
     if not text:
@@ -79,3 +81,80 @@ class SignUpForm(forms.Form):
             raise forms.ValidationError("رمز عبور با تکرار آن مطابقت ندارد.")
             
         return cleaned_data
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(
+        widget=forms.PasswordInput,
+        label="رمز عبور فعلی"
+    )
+    new_password = forms.CharField(
+        widget=forms.PasswordInput,
+        label="رمز عبور جدید",
+        min_length=8,
+        error_messages={
+            'min_length': 'رمز عبور باید حداقل ۸ کاراکتر باشد.'
+        }
+    )
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput,
+        label="تکرار رمز عبور جدید"
+    )
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user #add user field to form for validation
+        super().__init__(*args, **kwargs)
+
+    def clean_old_password(self):
+        old_password = self.cleaned_data.get('old_password')
+        if not self.user.check_password(old_password):
+            raise ValidationError("رمز عبور فعلی اشتباه است.")
+        return old_password
+
+    def clean(self):
+        cleaned_data = super().clean()
+        new_password = cleaned_data.get("new_password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if new_password and confirm_password:
+            if new_password != confirm_password:
+                self.add_error('confirm_password', "تکرار رمز عبور با رمز جدید مطابقت ندارد.")
+        
+        return cleaned_data
+
+class UserProfileForm(forms.Form):
+    first_name = forms.CharField(
+        max_length=20,
+        label="نام",
+        required=True,
+        error_messages={
+            'max_length': 'نام نمی‌تواند بیشتر از ۲۰ کاراکتر باشد.',
+            'required': 'وارد کردن نام الزامی است.'
+        }
+    )
+    
+    last_name = forms.CharField(
+        max_length=20,
+        label="نام خانوادگی",
+        required=True,
+        error_messages={
+            'max_length': 'نام خانوادگی نمی‌تواند بیشتر از ۲۰ کاراکتر باشد.',
+            'required': 'وارد کردن نام خانوادگی الزامی است.'
+        }
+    )
+    
+
+    email = forms.CharField(
+        required=False,
+        label="ایمیل",
+        validators=[EmailValidator(message="لطفاً یک ایمیل معتبر وارد کنید.")]
+    )
+
+    def save_profile(self, user):
+        user.first_name = self.cleaned_data.get('first_name')
+        user.last_name = self.cleaned_data.get('last_name')
+        
+        email_data = self.cleaned_data.get('email')
+        # if email_data: #agar ino bezarim email karvar pak nemishe dige
+        user.email = email_data
+            
+        user.save()
